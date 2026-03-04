@@ -1,5 +1,5 @@
 {
-  "name": "oo",
+  "name": "vuetify-project",
   "private": true,
   "type": "module",
   "version": "0.0.0",
@@ -18,7 +18,8 @@
     "@fontsource/roboto": "^5.2.9",
     "@mdi/font": "7.4.47",
     "vue": "^3.5.26",
-    "vuetify": "^4.0.0"
+    "vuetify": "^4.0.0",
+    "vue-router": "^4.6.4"
   },
   "devDependencies": {
     "@tsconfig/node22": "^22.0.5",
