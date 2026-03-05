@@ -26,6 +26,9 @@
               rounded="lg"
               class="pa-4"
             >
+            Page 0
+            </v-sheet>
+            <v-sheet v-else min-height="70vh" rounded="lg" class="pa-2 pt-4">
             Page 1
             </v-sheet>
           </v-col>
