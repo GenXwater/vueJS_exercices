@@ -1,7 +1,47 @@
 <template>
-  <HelloWorld />
+  <v-app>
+    <!-- Top bar -->
+    <v-app-bar class="grey-darken-4" flat density="compact">
+      <v-spacer></v-spacer>
+        <v-tabs v-model="selecteTab" centered color="frey-darken-1">
+          <v-tab v-for="link in links" :key="link">
+            {{ link }}
+          </v-tab>
+        </v-tabs>
+      <v-spacer></v-spacer>
+    </v-app-bar>
+    <!-- Container -->
+    <v-main>
+      <v-container fluid>
+        <v-row>
+          <!-- Left col -->
+          <v-col cols="12" sm="2">
+            
+          </v-col>
+          <!-- Main col -->
+          <v-col cols="12" sm="8">
+            <v-sheet
+              v-if="selecteTab == 0"
+              min-height="70vh"
+              rounded="lg"
+              class="pa-4"
+            >
+            Page 1
+            </v-sheet>
+          </v-col>
+          <!-- Right col -->
+          <v-col cols="12" sm="2">
+            
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
 
 <script lang="ts" setup>
-  import HelloWorld from '@/components/HelloWorld.vue'
+import { ref, watch, onMounted } from 'vue';
+
+let selecteTab = ref(0);
+const links = ref(["Dashboard", "About"]);
 </script>
