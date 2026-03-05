@@ -1,5 +1,4 @@
 import { AdFormat } from "@/enums/format.enums";
-import { v } from "vue-router/dist/router-CWoNjPRp.mjs";
 
 export default function groupeByAppAndCountry(data: any) {
     const result = [];
