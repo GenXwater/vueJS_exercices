@@ -26,10 +26,11 @@
               rounded="lg"
               class="pa-4"
             >
-            Page 0
+              <h2 class="mt-4">Apps list :</h2>
+              {{ apiResult }}
             </v-sheet>
             <v-sheet v-else min-height="70vh" rounded="lg" class="pa-2 pt-4">
-            Page 1
+              
             </v-sheet>
           </v-col>
           <!-- Right col -->
@@ -43,8 +44,23 @@
 </template>
 
 <script lang="ts" setup>
+// Imports
 import { ref, watch, onMounted } from 'vue';
 
+// Variables
 let selecteTab = ref(0);
 const links = ref(["Dashboard", "About"]);
+let apiResult = ref();
+
+// Vue lifecycle
+onMounted(async () => {
+  fetchMonetizationApi();
+})
+
+// API
+const fetchMonetizationApi = async () => {
+  fetch('https://www.anthony-cardinale.fr/_placeholder/monetization-api.json')
+  .then(response => response.json)
+  .then(data => apiResult.value = data);
+}
 </script>
