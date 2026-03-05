@@ -31,7 +31,14 @@
               <v-data-table
                 v-if="groupedData"
                 :items="groupedData"
-                :headers="headers">
+                :headers="headers"
+                item-value="app"
+                v-model:expanded="expanded"
+                show-expand
+              >
+              <template v-slot:header.app="{ column }">
+                {{ column.title?.toUpperCase() }}
+              </template>
               </v-data-table>
 
             </v-sheet>
@@ -59,6 +66,7 @@ let selecteTab = ref(0);
 const links = ref(["Dashboard", "About"]);
 let apiResult = ref();
 let groupedData = ref([]);
+let expanded = ref([]);
 const headers = ref([
   {title: "App",    key:"app"},
   {title: "US",     key:"totalRevenuesUS"},
