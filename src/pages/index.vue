@@ -46,6 +46,8 @@
                       The country that generated the most revenue for 
                       {{ item.app }} is {{ useGetBestCountry(item) }}
                       <br />
+                      <!-- TODO: CHART -->
+                      <br />
                       <v-row>
                         <v-col>
                           Total ads views: <b>{{ item.totalViews }}</b>
@@ -102,7 +104,8 @@
 // Imports
 import { ref, watch, onMounted } from 'vue';
 import useGroupApps from "../functions/useGroupApps";
-import useFormatRevenues from "../functions/useFormatRevenues"
+import useFormatRevenues from "../functions/useFormatRevenues";
+import useGetBestCountry from '@/functions/useGetBestCountry';
 
 // Variables
 let selecteTab = ref(0);

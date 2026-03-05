@@ -4,7 +4,7 @@ export default function useGetBestCountry(i: any) {
     const itemCopy = { ...i};
     delete itemCopy.data;
     delete itemCopy.app;
-    delete itemCopy.totalRevenue;
+    delete itemCopy.totalRevenues;
     delete itemCopy.totalViews;
     delete itemCopy.totalConversions;
     let bestCountryValue = 0;
@@ -17,5 +17,5 @@ export default function useGetBestCountry(i: any) {
         }
     }
 
-    return `${bestCountryName.slice(2)} with a total of ${useFormatRevenues(bestCountryValue)}`;
+    return `${bestCountryName.slice(-2)} with a total of ${useFormatRevenues(bestCountryValue)}.`;
 }
