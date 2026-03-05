@@ -19,7 +19,7 @@ export default function groupeByAppAndCountry(data: any) {
                 [`totalRevenues`]: 0,
                 [`views`]: 0,
                 [`conversions`]: 0,
-                [`platform`]: 0,
+                [`platform`]: "",
                 [`rewarded`]: 0,
                 [`fullscreen`]: 0,
                 [`video`]: 0,
@@ -33,7 +33,7 @@ export default function groupeByAppAndCountry(data: any) {
             appData[`totalViews`] = (appData[`totalViews`] || 0) + entry.views;
             appData[`totalConversions`] = (appData[`totalConversions`] || 0) + entry.conversions;
             appData[`platform`] = os == "Android" ? "android" : "ios";
-            appData[`rewerded`] = (appData[`rewerded`] || 0) + (format == AdFormat.REWARDED ? revenue : 0);
+            appData[`rewarded`] = (appData[`rewarded`] || 0) + (format == AdFormat.REWARDED ? revenue : 0);
             appData[`video`] = (appData[`video`] || 0) + (format == AdFormat.VIDEO ? revenue : 0);
             appData[`banner`] = (appData[`banner`] || 0) + (format == AdFormat.BANNER ? revenue: 0);
             appData[`fullscreen`] = (appData[`fullscreen`] || 0) + (format == AdFormat.FULLSCREEN ? revenue: 0);
