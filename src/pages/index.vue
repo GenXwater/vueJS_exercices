@@ -27,7 +27,13 @@
               class="pa-4"
             >
               <h2 class="mt-4">Apps list :</h2>
-              {{ groupedData }}
+
+              <v-data-table
+                v-if="groupedData"
+                :items="groupedData"
+                :headers="headers">
+              </v-data-table>
+
             </v-sheet>
             <v-sheet v-else min-height="70vh" rounded="lg" class="pa-2 pt-4">
               
@@ -53,6 +59,17 @@ let selecteTab = ref(0);
 const links = ref(["Dashboard", "About"]);
 let apiResult = ref();
 let groupedData = ref([]);
+const headers = ref([
+  {title: "App",    key:"app"},
+  {title: "US",     key:"totalRevenuesUS"},
+  {title: "UK",     key:"totalRevenuesUK"},
+  {title: "FR",     key:"totalRevenuesFR"},
+  {title: "JP",     key:"totalRevenuesJP"},
+  {title: "CN",     key:"totalRevenuesCN"},
+  {title: "AU",     key:"totalRevenuesAU"},
+  {title: "Total",  key:"totalRevenues"},
+  {title: "",       key:"data-table-expand"},
+])
 
 // Vue lifecycle
 onMounted(async () => {
