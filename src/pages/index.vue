@@ -39,6 +39,48 @@
               <template v-slot:header.app="{ column }">
                 {{ column.title?.toUpperCase() }}
               </template>
+              <template v-slot:expanded-row="{ columns, item }">
+                <tr>
+                  <td :colspan="columns.length">
+                    <div style="padding: 15px">
+                      The country that generated the most revenue for 
+                      {{ item.app }} is {{ useGetBestCountry(item) }}
+                      <br />
+                      <v-row>
+                        <v-col>
+                          Total ads views: <b>{{ item.totalViews }}</b>
+                          <br />
+                          Total conversions: <b>{{ item.totalConversions }}</b>
+                          <br />
+                          Conversions %:
+                          <b>
+                            {{ 
+                              ((item.totalConversions * 100) / item.totalViews).toFixed(2)
+                            }}
+                          %
+                          </b>
+                          <br />
+                          Total revenues:
+                          <b>{{ useFormatRevenues(item.totalRevenues) }}</b>
+                        </v-col>
+                        <v-col>
+                          Total banner revenues:
+                          <b>{{ useFormatRevenues(item.banner) }}</b>
+                          <br />
+                          Total full-screen revenues:
+                          <b>{{ useFormatRevenues(item.fullscreen) }}</b>
+                          <br />
+                          Total video revenues:
+                          <b>{{ useFormatRevenues(item.video) }}</b>
+                          <br />
+                          Total rewarded revenues:
+                          <b>{{ useFormatRevenues(item.rewarded) }}</b>
+                        </v-col>
+                      </v-row>
+                    </div>
+                  </td>
+                </tr>
+              </template>
               </v-data-table>
 
             </v-sheet>
@@ -60,6 +102,7 @@
 // Imports
 import { ref, watch, onMounted } from 'vue';
 import useGroupApps from "../functions/useGroupApps";
+import useFormatRevenues from "../functions/useFormatRevenues"
 
 // Variables
 let selecteTab = ref(0);
