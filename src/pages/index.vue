@@ -130,7 +130,7 @@
 
             </v-sheet>
             <v-sheet v-else min-height="70vh" rounded="lg" class="pa-2 pt-4">
-              
+              <AboutPage />
             </v-sheet>
           </v-col>
           <!-- Right col -->
@@ -158,6 +158,7 @@ import BarChart from '@/components/BarChart.vue';
 import KpiBloc from '@/components/KpiBloc.vue';
 import FilterBloc from '@/components/FilterBloc.vue';
 import RightSummaryBloc from '@/components/RightSummaryBloc.vue';
+import AboutPage from '@/components/AboutPage.vue';
 
 // Variables
 let selecteTab = ref(0);
