@@ -16,7 +16,10 @@
         <v-row>
           <!-- Left col -->
           <v-col cols="12" sm="2">
-            
+            <!-- Field & Value filter -->
+            <filter-bloc
+              @searchValueChanged="updateSearchValue"
+            />
           </v-col>
           <!-- Main col -->
           <v-col cols="12" sm="8">
@@ -62,6 +65,7 @@
                 item-value="app"
                 v-model:expanded="expanded"
                 show-expand
+                :search="searchValue"
               >
               <template v-slot:header.app="{ column }">
                 {{ column.title?.toUpperCase() }}
@@ -150,6 +154,7 @@ import FilterBloc from '@/components/FilterBloc.vue';
 // Components
 import BarChart from '@/components/BarChart.vue';
 import KpiBloc from '@/components/KpiBloc.vue';
+import FilterBloc from '@/components/FilterBloc.vue';
 
 // Variables
 let selecteTab = ref(0);
@@ -167,7 +172,8 @@ const headers = ref([
   {title: "AU",     key:"totalRevenuesAU"},
   {title: "Total",  key:"totalRevenues"},
   {title: "",       key:"data-table-expand"},
-])
+]);
+let searchValue = ref("");
 
 // Vue lifecycle
 onMounted(async () => {
@@ -198,6 +204,10 @@ const getTotalOsRevenues = (os = "") => {
   })
 
   return `${useFormatRevenues(total)}`;
+};
+
+const updateSearchValue = (val:any) => {
+  searchValue.value = val;
 };
 
 </script>
