@@ -145,6 +145,7 @@ import { ref, watch, onMounted } from 'vue';
 import useGroupApps from "../functions/useGroupApps";
 import useFormatRevenues from "../functions/useFormatRevenues";
 import useGetBestCountry from '@/functions/useGetBestCountry';
+import FilterBloc from '@/components/FilterBloc.vue';
 
 // Components
 import BarChart from '@/components/BarChart.vue';
