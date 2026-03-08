@@ -1,11 +1,11 @@
 <template>
     <div id="app" style="width: 500px;">
-        <BarChart v-bind="barChartProps" options="options" />
+        <BarChart v-bind="barChartProps" :options="options" />
     </div>
 </template>
 
 <script setup lang="ts">
-    import { computed } from 'vue';
+    import { computed, ref } from 'vue';
     import { Chart, registerables } from 'chart.js';
     import { BarChart, useBarChart } from "vue-chart-3";
     Chart.register(...registerables);
