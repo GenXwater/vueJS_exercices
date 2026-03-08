@@ -26,6 +26,33 @@
               rounded="lg"
               class="pa-4"
             >
+              <!-- KPI Overview -->
+              <v-row>
+                <v-col>
+                  <kpi-bloc
+                    :isUp="false"
+                    blocTitle="Total Android revenues"
+                    :blocValue="getTotalOsRevenues('android')"
+                  />
+                </v-col>
+                <v-col>
+                  <kpi-bloc
+                    :isUp="true"
+                    blocTitle="Total iOS revenues"
+                    :blocValue="getTotalOsRevenues('ios')"
+                  />
+                </v-col>
+                <v-col>
+                  <kpi-bloc
+                    :isUp="false"
+                    blocTitle="Total revenues"
+                    :blocValue="getTotalOsRevenues('')"
+                  />
+                </v-col>
+              </v-row>
+
+              <v-divider class="mt-4"></v-divider>
+
               <h2 class="mt-4">Apps list :</h2>
 
               <v-data-table
@@ -121,6 +148,7 @@ import useGetBestCountry from '@/functions/useGetBestCountry';
 
 // Components
 import BarChart from '@/components/BarChart.vue';
+import KpiBloc from '@/components/KpiBloc.vue';
 
 // Variables
 let selecteTab = ref(0);
@@ -156,4 +184,19 @@ const fetchMonetizationApi = async () => {
   .then(response => response.json())
   .then(data => apiResult.value = data);
 };
+
+// Functions
+const getTotalOsRevenues = (os = "") => {
+  let total = 0;
+  groupedData.value.forEach((app: any) => {
+    if (os !== "") {
+      total += app.platform == os ? app.totalRevenues : 0;
+    } else {
+      total += app.totalRevenues;
+    }
+  })
+
+  return `${useFormatRevenues(total)}`;
+};
+
 </script>
