@@ -135,7 +135,10 @@
           </v-col>
           <!-- Right col -->
           <v-col cols="12" sm="2">
-            
+            <right-summary-bloc
+              :groupedData="groupedData"
+              :searchValue="searchValue"
+            />
           </v-col>
         </v-row>
       </v-container>
@@ -154,6 +157,7 @@ import useGetBestCountry from '@/functions/useGetBestCountry';
 import BarChart from '@/components/BarChart.vue';
 import KpiBloc from '@/components/KpiBloc.vue';
 import FilterBloc from '@/components/FilterBloc.vue';
+import RightSummaryBloc from '@/components/RightSummaryBloc.vue';
 
 // Variables
 let selecteTab = ref(0);
