@@ -46,7 +46,19 @@
                       The country that generated the most revenue for 
                       {{ item.app }} is {{ useGetBestCountry(item) }}
                       <br />
-                      <!-- TODO: CHART -->
+                      
+                      <BarChart
+                        class="d-flex mx-auto my-0"
+                        :data="[
+                          item.totalRevenuesUS,
+                          item.totalRevenuesUK,
+                          item.totalRevenuesFR,
+                          item.totalRevenuesJP,
+                          item.totalRevenuesCN,
+                          item.totalRevenuesAU,
+                          ]"
+                        />
+                      
                       <br />
                       <v-row>
                         <v-col>
@@ -106,6 +118,9 @@ import { ref, watch, onMounted } from 'vue';
 import useGroupApps from "../functions/useGroupApps";
 import useFormatRevenues from "../functions/useFormatRevenues";
 import useGetBestCountry from '@/functions/useGetBestCountry';
+
+// Components
+import BarChart from '@/components/BarChart.vue';
 
 // Variables
 let selecteTab = ref(0);
