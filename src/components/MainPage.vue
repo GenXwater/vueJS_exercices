@@ -11,6 +11,16 @@
 
     Total : {{ getTotalPrice }} €
     <br />
+    <p>Produit dans le panier :</p>
+    <ul>
+        <li v-for="p in cart" :key="p.id">{{ p.name }} ({{ p.quantity }}) <button @click="deleteProduct(p.id)">X</button></li>
+    </ul>
+    <br />
+    <br />
+    <button @click="addProduct1">Ajouter produit 1 - 10€</button><br />
+    <button @click="addProduct2">Ajouter produit 2 - 20€</button><br /><br />
+    {{ getCart }}<br /><br />
+    {{ cart }}
 
 </template>
 
@@ -53,7 +63,8 @@
 
     const { getCart, getTotalPrice, cart } = storeToRefs(storeCart);
     const { addProduct } = storeCart; // permet de faire directement : addProduct(product1) au lieu de storeCart.addProduct(product2)
-
+    const { deleteProduct } = storeCart;
+    
     const product1 = {
         id: 2,
         name: "product1",
@@ -77,5 +88,4 @@
         storeCart.addProduct(product2)
         storeCart.refreshkey++;
     }
-
 </script>
