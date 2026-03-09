@@ -1,17 +1,27 @@
 <template>
+    <!-- ANCIEN EXERCICE
     <h1>Page</h1>
     {{ recettes }}
     <ul>
         <li v-for="r in recettes">{{ r.name  }}</li>
     </ul>
+    -->
+
+    <h1>Panier</h1>
+
+    Total : {{ getTotalPrice }} €
+    <br />
+
 </template>
 
 <script setup lang="ts">
     import { useRecetteStore } from '@/stores/recette';
+    import { useCartStore } from '@/stores/cart';
+    import { storeToRefs } from 'pinia';
 
-    const storeRecette = useRecetteStore()
+    const storeRecette = useRecetteStore();
 
-    storeRecette.DeleteRecette(1)
+    storeRecette.DeleteRecette(1);
 
     const maRecette = {
         id: 10,
@@ -36,5 +46,36 @@
     // storeRecette.resetStore() // vide recettes
 
     const recettes = storeRecette.getRecettes
+
+    // -------------------------------------- //
+
+    const storeCart = useCartStore();
+
+    const { getCart, getTotalPrice, cart } = storeToRefs(storeCart);
+    const { addProduct } = storeCart; // permet de faire directement : addProduct(product1) au lieu de storeCart.addProduct(product2)
+
+    const product1 = {
+        id: 2,
+        name: "product1",
+        price: 10,
+        quantity: 1,
+    };
+
+    const product2 = {
+        id: 3,
+        name: "product2",
+        price: 20,
+        quantity: 1,
+    };
+
+    const addProduct1 = () => {
+        addProduct(product1)
+        storeCart.refreshkey++;
+    }
+
+    const addProduct2 = () => {
+        storeCart.addProduct(product2)
+        storeCart.refreshkey++;
+    }
 
 </script>
