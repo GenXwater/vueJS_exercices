@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia'
 
-export const useRecetteStore = defineStore({
-    id: 'recette',
+export const useRecetteStore = defineStore('recette', {
 
     // State / Etat
     state: () => ({
