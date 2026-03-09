@@ -7,3 +7,7 @@
     <img src="/copyright-6114655_1280-3092848910.jpg" width="220" /> <!-- depuis /public -->
     <img src="~/assets/copyright-6114655_1280-3092848910.jpg" width="220" /> <!-- depuis /assets -->
 </template>
+
+<style>
+@import url("~/assets/test.css");
+</style>
