@@ -9,5 +9,5 @@
 </template>
 
 <style>
-@import url("~/assets/test.css");
+/* @import url("~/assets/test.css");    <---- Une façon d'insérer du style */
 </style>
