@@ -45,4 +45,29 @@ export const useRecetteStore = defineStore('recette', {
         getRecettes: (state) => state.recettes,
         getFirstRecette: (state) => state.recettes[0],
     },
+
+    // Actions
+    actions: {
+        resetStore() {
+            this.recettes = []
+        },
+
+        DeleteRecette(itemId:number) {
+            this.recettes.splice(this.recettes.findIndex(function(i){
+                return i.id === itemId
+            }), 1)
+        },
+
+        updateRecette(item:any) {
+            const foundIndex = this.recettes.findIndex(function(i){
+                return i.id === item.id
+            })
+            if (foundIndex !== -1) {
+                this.recettes[foundIndex] = item
+            } else {
+                item.id = Math.random().toString(16).slice(2)
+                this.recettes[this.recettes.length] = item
+            }
+        },
+    }
 })
