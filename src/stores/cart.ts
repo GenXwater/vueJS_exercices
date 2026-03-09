@@ -43,14 +43,13 @@ export const useCartStore = defineStore('cart', {
         },
         
         addProduct(item:any) {
-            const foundIndex = this.cart.findIndex(function(i){
+            const foundIndex = this.cart.find(function(i){
                 return i.id === item.id
             })
-            if (foundIndex !== -1) {
-                item.quantity++
-                this.cart[foundIndex] = item
+            if (foundIndex) {
+                foundIndex.quantity++
             } else {
-                this.cart[this.cart.length] = item
+                this.cart.push({ ...item })
             }
         }
     },
