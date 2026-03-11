@@ -4,15 +4,15 @@
             <!-- Fixed navbar -->
             <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#">Fixed navbar</a>
+                    <a class="navbar-brand" href="#">Actualite</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <ul class="navbar-nav me-auto mb-2 mb-md-0">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                                <nuxt-link class="nav-link active" aria-current="page" to="/">Accueil</nuxt-link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Link</a>
+                                <nuxt-link class="nav-link" to="/contact">Contact</nuxt-link>
                             </li>
                         </ul>
                     </div>
@@ -33,8 +33,12 @@
                 <span class="text-body-secondary">Place sticky footer content here.</span>
             </div>
         </footer>
-    </div>>
+    </div>
 </template>
+
+<script setup lang="ts">
+
+</script>
 
 <style>
     #mainContainer {
