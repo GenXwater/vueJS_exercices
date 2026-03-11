@@ -9,10 +9,10 @@
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <ul class="navbar-nav me-auto mb-2 mb-md-0">
                             <li class="nav-item">
-                                <nuxt-link class="nav-link active" aria-current="page" to="/">Accueil</nuxt-link>
+                                <nuxt-link class="nav-link" :class="route.path === '/' ? 'active' : ''" to="/">Accueil</nuxt-link>
                             </li>
                             <li class="nav-item">
-                                <nuxt-link class="nav-link" to="/contact">Contact</nuxt-link>
+                                <nuxt-link class="nav-link" :class="route.path === '/contact' ? 'active' : ''" to="/contact">Contact</nuxt-link>
                             </li>
                         </ul>
                     </div>
@@ -37,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-
+    const route = useRouter().currentRoute // va chercher le chemin pour ensuite utiliser la classe "active" et donc gérer la surbrillance du menu, via :class="route.path"
 </script>
 
 <style>
