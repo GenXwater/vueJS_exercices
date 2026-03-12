@@ -7,7 +7,8 @@ export default defineEventHandler(async (event) => {
       apikey: config.apiSecret,
       q: query.q ?? 'ai',
       category: query.category ?? 'technology',
-      language: query.language ?? 'en',
+      language: query.language ?? 'fr',
+      country: query.country ?? 'fr',
       size: query.size ?? 10
     }
   })
