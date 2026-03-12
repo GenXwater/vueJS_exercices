@@ -8,10 +8,10 @@
       >
         <div class="card h-100 shadow-sm">
           <img :src="actu.image_url" class="card-img-top" alt="">
-          <div class="card-body">
+          <div class="card-body d-flex flex-column">
             <h5 class="card-title">{{ actu.title.slice(0, 100) }}</h5>
             <p class="card-text">{{ actu.description.slice(0, 300) }}</p>
-            <a :href="actu.link" class="btn btn-primary btn-sm">Lire la suite</a>
+            <a :href="actu.link" class="btn btn-primary btn-sm mt-auto align-self-end">Lire la suite</a>
           </div>
         </div>
       </div>
