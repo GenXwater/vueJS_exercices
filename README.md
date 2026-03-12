@@ -27,7 +27,7 @@ Nuxt crée les routes automatiquement à partir des fichiers dans `app/pages`.
 - `app/pages/index.vue` -> `/`
 - `app/pages/contact.vue` -> `/contact`
 
-Tu n'écris pas de configuration de routes à la main : Nuxt le fait pour toi.
+Il n'y a pas de configuration de routes à écrire à la main.
 
 ### 2) `runtimeConfig` : séparer clé privée et config publique
 Dans `nuxt.config.ts`, on stocke :
@@ -44,7 +44,7 @@ runtimeConfig: {
 }
 ```
 
-Pourquoi ?
+Pourquoi :
 - `apiSecret` ne doit jamais être exposée au navigateur
 - `public.apiBase` peut être visible côté client
 
@@ -83,7 +83,7 @@ Dans `app/pages/index.vue`, on appelle l'API interne :
 const { data, pending, error } = await useFetch('/api/news')
 ```
 
-Tu récupères :
+Cela fournit :
 - `data` : les articles
 - `pending` : l'état de chargement
 - `error` : les erreurs possibles
@@ -102,7 +102,7 @@ On utilise la grille Bootstrap pour un rendu propre et responsive :
 </div>
 ```
 
-Ce que ça fait :
+Ce que cela fait :
 - `container` : largeur lisible
 - `py-4` : padding vertical
 - `row g-3` : espace entre les cartes
@@ -165,4 +165,4 @@ const { data } = await useFetch('/api/news')
 - `server/api` permet de cacher les clés API.
 - `useFetch` simplifie les appels côté page.
 - Bootstrap donne un rendu propre en quelques classes.
-- Tu as un micro site d'actus simple, clair, et réutilisable.
+- Un micro site d'actus simple, clair et réutilisable.
