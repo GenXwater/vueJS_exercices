@@ -5,4 +5,11 @@ export default defineNuxtConfig({
   css: [
     "bootstrap/dist/css/bootstrap.min.css" // va chercher directement dans les node_module.
   ],
+  runtimeConfig: {
+    apiSecret: process.env.NEWSDATA_API_KEY,
+
+    public: {
+      apiBase: 'https://newsdata.io/api/1'
+    }
+  }
 })
