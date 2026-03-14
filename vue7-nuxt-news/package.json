@@ -1,0 +1,23 @@
+{
+  "name": "vue7-nuxt-news",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.8",
+    "nuxt": "^4.3.1",
+    "vue": "^3.5.30",
+    "vue-router": "^4.6.4"
+  },
+  "devDependencies": {
+    "@types/node": "^25.4.0",
+    "sass": "^1.98.0",
+    "sass-loader": "^16.0.7"
+  }
+}
