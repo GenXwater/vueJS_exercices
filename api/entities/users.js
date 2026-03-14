@@ -1,6 +1,6 @@
 import { readFile, writeFile } from 'fs/promises';
 
-const patch = './db/users.json';
+const path = './db/users.json';
 
 export async function getUsers(hidePass = false) {
     const jsonData = await readFile(path, 'utf8');
