@@ -1,4 +1,5 @@
 import { createServer } from "http";
+import { readUsers } from "./api/usersApi.js";
 
 createServer(async (req, res) => {
     res.setHeader('Content-Type', 'application/json')
@@ -12,7 +13,8 @@ createServer(async (req, res) => {
 
     switch (url.pathname) {
         case "/users":
-            console.log("users");
+            if (method === "GET")
+                response = await readUsers();
         break;
         case "/checkUser":
 
