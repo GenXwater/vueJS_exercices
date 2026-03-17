@@ -1,8 +1,1 @@
-[
-    {
-        "id": "1",
-        "name": "Projet 1",
-        "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        "user": "1"
-    }
-]
+[{"id":"bc1e2821-ffd4-4d01-a4fa-e55087910db6","name":"Project 3","desc":"Ceci est un super projet","user":1},{"id":"1","name":"Projet 1","desc":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","user":"1"}]
