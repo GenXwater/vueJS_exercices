@@ -1,5 +1,10 @@
 # API Node.js (cours Vue.js)
 
+## Lancer le serveur
+```bash
+node app.js
+```
+
 ## But du projet
 Créer une petite API HTTP en Node.js (sans framework) pour alimenter une application Vue.js.
 

@@ -1,8 +1,1 @@
-[
-    {
-        "id": "1",
-        "email": "adminuser@mail.fr",
-        "pass": "admin123",
-        "isAdmin": true
-    }
-]
+[{"email":"didier@mail.eu","pass":"123456789","isAdmin":false,"id":"0795b1fa-164a-4011-8f4e-847cb125d4ee"},{"email":"PouePouec@mail.eu","pass":"123456789","isAdmin":false,"id":"8d2df8eb-7057-44a5-a02f-cda63bdfbb64"},{"id":"1","email":"admin@mail.com","pass":"1234","isAdmin":true}]
