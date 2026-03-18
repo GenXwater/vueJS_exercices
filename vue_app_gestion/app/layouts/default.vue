@@ -2,7 +2,7 @@
   <v-app>
     <v-layout class="rounded rounded-md border">
       <v-app-bar>
-        <v-app-bar-title>Menu</v-app-bar-title>
+        <v-app-bar-title>Application de gestion</v-app-bar-title>
         <v-spacer />
         <v-menu>
           <template #activator="{ props }">
@@ -53,18 +53,10 @@
         </v-list>
       </v-navigation-drawer>
 
-      <v-main class="d-flex align-center justify-center" height="300">
-        <v-container>
-          <v-sheet
-            border="dashed md"
-            color="surface-light"
-            height="200"
-            rounded="lg"
-            width="100%"
-          >
-
-          </v-sheet>
-        </v-container>
+      <v-main>
+        <div class="pa-4" v-if="showContent">
+          <slot />
+        </div>
       </v-main>
     </v-layout>
   </v-app>
@@ -72,6 +64,8 @@
 
 <script setup lang="ts">
   const drawer = ref(true);
+
+  const showContent = ref(true)
 
   const items = [
     { text: 'Dashboard', icon: 'mdi-view-dashboard', url: '/' },
@@ -82,6 +76,6 @@
 
   const options = [
     { text: 'Options', icon: 'mdi-view-dashboard', url: '/options' },
-    { text: 'Se déconnecter', icon: 'mdi-account-group', url: "/team" },
+    { text: 'Se déconnecter', icon: 'mdi-account-group', url: "/Logout" },
   ]
 </script>

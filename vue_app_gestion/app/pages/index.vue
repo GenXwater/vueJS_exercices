@@ -1,5 +1,5 @@
 <template>
-    <h1>Accueil</h1>
+    <h1 class="ma-0 mb-4">Accueil</h1>
     <v-card
         class="mx-auto"
         max-width="368"
