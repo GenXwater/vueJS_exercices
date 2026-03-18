@@ -187,47 +187,47 @@
     </v-container>
 
     <v-container>
-            <div>
-                <v-container class="d-flex flex-wrap ga-4 px-0 justify-center">
-                <v-card
-                    v-for="(c, i) in cards"
-                    :key="i"
-                    elevation="6"
-                    mode="out-in"
-                    rounded="pill"
-                    width="330"
-                >
-                    <div class="d-flex align-center pa-3 justify-space-between">
-                    <div class="mt-n2">
-                        <v-card-title v-text="c.title"></v-card-title>
-                        <v-card-subtitle class="mt-n1" v-text="c.subtitle"></v-card-subtitle>
+        <v-container class="d-flex px-0 justify-center">
+            <v-card elevation="8" rounded="xl" width="580" class="pa-2">
+                <div class="d-flex align-center justify-space-between px-4 py-3">
+                    <div class="d-flex flex-column ga-2">
+                        <v-card-title class="pa-0 text-h4 font-weight-bold">Progression du CA</v-card-title>
+                        <div class="text-h6 font-weight-medium">
+                            {{ formatEuros(caCurrent) }}
+                            <span class="text-medium-emphasis">/ {{ formatEuros(caGoal) }}</span>
+                        </div>
+                        <v-chip :color="remainingColor" variant="tonal" rounded="pill" size="small" class="font-weight-medium">
+                            {{ remainingLabel }}
+                        </v-chip>
+                        <div class="mt-2">
+                            <v-btn color="orange-accent-2" variant="flat" rounded="pill" size="large">
+                                Rapport détaillé
+                            </v-btn>
+                        </div>
                     </div>
+
                     <v-progress-circular
-                        :key="`${updateTrigger}_${i}`"
-                        :model-value="c.value"
-                        :size="100"
-                        :width="12"
+                        :model-value="caProgress"
+                        :size="128"
+                        :width="13"
                         bg-color="surface-light"
-                        class="ma-3"
+                        class="ma-1"
                         color="orange-accent-2"
-                        reveal
                         rounded
                     >
-                        <v-avatar color="surface-light" size="70">{{ c.value }}%</v-avatar>
+                        <v-avatar color="surface-light" size="86" class="text-h6 font-weight-bold">
+                            {{ Math.round(caProgress) }}%
+                        </v-avatar>
                     </v-progress-circular>
-                    </div>
-                </v-card>
-                </v-container>
-                <div class="d-flex justify-center">
-                <v-btn color="primary" text="Reload" @click="updateTrigger++"></v-btn>
                 </div>
-            </div>
+            </v-card>
+        </v-container>
     </v-container>
 </template>
 
 
 <script setup>
-    import { ref } from 'vue'
+    import { computed, onMounted, ref } from 'vue'
 
     const labels = { 0: 'SU', 1: 'MO', 2: 'TU', 3: 'WED', 4: 'TH', 5: 'FR', 6: 'SA' }
     const forecast = [
@@ -239,12 +239,38 @@
     const expand = ref(false)
     const time = ref(0)
 
-    import { shallowRef } from 'vue'
+    const caCurrent = 90_000
+    const caGoal = 100_000
+    const caTarget = (caCurrent / caGoal) * 100
+    const caProgress = ref(0)
+    const caRemaining = computed(() => caGoal - caCurrent)
+    const remainingColor = computed(() => (caRemaining.value > 0 ? 'error' : 'success'))
+    const remainingLabel = computed(() => {
+        const amount = formatEuros(Math.abs(caRemaining.value))
+        return caRemaining.value > 0 ? `${amount} restant` : `${amount} au-dessus de l'objectif`
+    })
 
-        const updateTrigger = shallowRef(0)
+    function formatEuros(value) {
+        return new Intl.NumberFormat('fr-FR').format(value) + '€'
+    }
 
-        const cards = [
-            { title: 'CPU Usage', subtitle: '0.63 / 2 units', value: 31.5 },
-            { title: 'Memory Usage', subtitle: '13.43 / 16 GB', value: 83.9 },
-        ]
+    function animateProgress(toValue, duration = 1500) {
+        const start = performance.now()
+        const fromValue = 0
+
+        const tick = (now) => {
+            const elapsed = now - start
+            const progress = Math.min(elapsed / duration, 1)
+            const eased = 1 - Math.pow(1 - progress, 3)
+            caProgress.value = fromValue + (toValue - fromValue) * eased
+
+            if (progress < 1) requestAnimationFrame(tick)
+        }
+
+        requestAnimationFrame(tick)
+    }
+
+    onMounted(() => {
+        animateProgress(caTarget)
+    })
 </script>
