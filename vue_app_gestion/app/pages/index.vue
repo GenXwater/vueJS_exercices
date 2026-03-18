@@ -207,16 +207,18 @@
                     </div>
 
                     <v-progress-circular
-                        :model-value="caProgress"
+                        :key="`ca_${updateTrigger}`"
+                        :model-value="caTarget"
                         :size="128"
                         :width="13"
                         bg-color="surface-light"
                         class="ma-1"
                         color="orange-accent-2"
+                        reveal
                         rounded
                     >
                         <v-avatar color="surface-light" size="86" class="text-h6 font-weight-bold">
-                            {{ Math.round(caProgress) }}%
+                            {{ Math.round(caTarget) }}%
                         </v-avatar>
                     </v-progress-circular>
                 </div>
@@ -238,11 +240,11 @@
 
     const expand = ref(false)
     const time = ref(0)
+    const updateTrigger = ref(0)
 
     const caCurrent = 90_000
     const caGoal = 100_000
     const caTarget = (caCurrent / caGoal) * 100
-    const caProgress = ref(0)
     const caRemaining = computed(() => caGoal - caCurrent)
     const remainingColor = computed(() => (caRemaining.value > 0 ? 'error' : 'success'))
     const remainingLabel = computed(() => {
@@ -254,23 +256,7 @@
         return new Intl.NumberFormat('fr-FR').format(value) + '€'
     }
 
-    function animateProgress(toValue, duration = 1500) {
-        const start = performance.now()
-        const fromValue = 0
-
-        const tick = (now) => {
-            const elapsed = now - start
-            const progress = Math.min(elapsed / duration, 1)
-            const eased = 1 - Math.pow(1 - progress, 3)
-            caProgress.value = fromValue + (toValue - fromValue) * eased
-
-            if (progress < 1) requestAnimationFrame(tick)
-        }
-
-        requestAnimationFrame(tick)
-    }
-
     onMounted(() => {
-        animateProgress(caTarget)
+        updateTrigger.value++
     })
 </script>
