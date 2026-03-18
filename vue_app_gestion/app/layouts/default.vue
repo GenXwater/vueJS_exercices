@@ -3,9 +3,9 @@
     <v-layout class="rounded rounded-md border">
       <v-app-bar title="Application bar"></v-app-bar>
 
-      <v-navigation-drawer>
+      <v-navigation-drawer v-model="drawer">
         <v-list nav>
-          <v-list-subheader>REPORTS</v-list-subheader>
+          <v-list-subheader>ADMINISTRATION</v-list-subheader>
 
           <v-list-item
             v-for="(item, i) in items"
@@ -13,6 +13,7 @@
             :value="item"
             color="primary"
             rounded="xl"
+            :to="item.url"
           >
             <template v-slot:prepend>
               <v-icon :icon="item.icon"></v-icon>
@@ -39,9 +40,12 @@
 </template>
 
 <script setup>
+  const drawer = ref(true);
+
   const items = [
-    { text: 'Real-Time', icon: 'mdi-clock' },
-    { text: 'Audience', icon: 'mdi-account' },
-    { text: 'Conversions', icon: 'mdi-flag' },
+    { text: 'Dashboard', icon: 'mdi-view-dashboard', url: '/' },
+    { text: 'Team', icon: 'mdi-account-group', url: "/team"  },
+    { text: 'Projects', icon: 'mdi-folder-multiple', url: "/projects"  },
+    { text: 'Reports', icon: 'mdi-file-chart', url: "/reports" },
   ]
 </script>
