@@ -17,7 +17,21 @@
         density="compact" placeholder="Enter your password" prepend-inner-icon="mdi-lock-outline" variant="outlined"
         @click:append-inner="visible = !visible" v-model="userData.pass"></v-text-field>
 
-      <v-btn class="mb-8" color="blue" size="large" variant="tonal" block @click="login">
+      <v-expand-transition>
+        <v-alert
+          v-if="error"
+          class="mb-6 login-alert"
+          type="error"
+          variant="tonal"
+          rounded="xl"
+          icon="mdi-alert-circle-outline"
+          density="comfortable"
+        >
+          Email ou mot de passe incorrect.
+        </v-alert>
+      </v-expand-transition>
+
+      <v-btn class="mb-8 login-btn" color="blue" size="large" variant="flat" block @click="login">
         Log In
       </v-btn>
     </v-card>
@@ -56,10 +70,26 @@ const login = async () => {
             error.value = true
         } else {
             localStorage.setItem("isAdmin", "true"); // pas sécurisé mais ce n'est pas le but du cours.
-            navigateTo("/");
+            await navigateTo("/");
         }
     } catch {
         error.value = true
     }
 }
 </script>
+
+<style scoped>
+.login-alert {
+  border: 1px solid rgba(244, 67, 54, 0.35);
+  backdrop-filter: blur(3px);
+}
+
+.login-btn {
+  border-radius: 999px;
+  border: 1px solid rgba(30, 136, 229, 0.45);
+  letter-spacing: 0.2px;
+  font-weight: 600;
+  text-transform: none;
+  box-shadow: 0 10px 24px -16px rgba(30, 136, 229, 0.9);
+}
+</style>
