@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card class="mx-auto pa-12 pb-8" elevation="3" max-width="448" rounded="lg">
+    <v-card class="mx-auto pa-12 pb-8" elevation="3" max-width="448" rounded="xl">
       <div class="text-body-large text-medium-emphasis">Account</div>
 
       <v-text-field density="compact" placeholder="Email address" prepend-inner-icon="mdi-email-outline"
@@ -57,12 +57,13 @@ const login = async () => {
     error.value = false
 
     try {
-        const { data: responseData } = await useFetch(
-            `http://localhost:3002/checkUser?email=${(userData.value.email)}&pass=${(userData.value.pass)}`,
-            {
-                method: 'GET',
+        const responseData = await $fetch('http://localhost:3002/checkUser', {
+            method: 'GET',
+            params: {
+                email: userData.value.email,
+                pass: userData.value.pass
             }
-        )
+        })
 
         if (!responseData.value || responseData.value.length === 0) {
             error.value = true
