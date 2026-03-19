@@ -24,7 +24,7 @@
         </v-card-text>
       </v-card>
 
-      <v-btn class="mb-8" color="blue" size="large" variant="tonal" block>
+      <v-btn class="mb-8" color="blue" size="large" variant="tonal" block @click="login">
         Log In
       </v-btn>
 
