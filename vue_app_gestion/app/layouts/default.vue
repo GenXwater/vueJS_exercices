@@ -65,9 +65,22 @@
 </template>
 
 <script setup lang="ts">
+  import { ref, onMounted } from 'vue'
+
+  onMounted(async () => {
+    const isAdminStorage = localStorage.getItem("isAdmin")
+    if (isAdminStorage !== "true") {
+      showContent.value = false
+      await navigateTo("/login")
+      return
+    }
+
+    showContent.value = true
+  })
+
   const drawer = ref(true);
 
-  const showContent = ref(true)
+  const showContent = ref(false)
 
   const items = [
     { text: 'Dashboard', icon: 'mdi-view-dashboard', url: '/' },
