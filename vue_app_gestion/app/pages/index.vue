@@ -95,16 +95,16 @@
 
             <v-col>
                 <v-card class="mx-auto rounded-xl pa-2" max-width="368">
-                    <v-card-item title="Utilisateurs">
+                    <v-card-item title="Projets">
                     <template v-slot:subtitle>
                         <v-icon
                         class="me-1 pb-1"
-                        color="success"
-                        icon="mdi-trending-up"
+                        color="error"
+                        icon="mdi-trending-down"
                         size="18"
                         ></v-icon>
 
-                        En hausse de 5%
+                        En baisse de 1%
                     </template>
                     </v-card-item>
 
@@ -114,13 +114,13 @@
                         class="text-display-large font-weight-light"
                         cols="6"
                         >
-                        64
+                        84
                         </v-col>
 
                         <v-col class="text-right" cols="6">
                         <v-icon
                             color="error"
-                            icon="mdi-account"
+                            icon="mdi-folder-multiple"
                             size="88"
                         ></v-icon>
                         </v-col>
@@ -130,16 +130,16 @@
                     <div class="d-flex py-3 justify-space-between">
                     <v-list-item
                         density="compact"
-                        prepend-icon="mdi-gender-male"
+                        prepend-icon="mdi-folder-open"
                     >
-                        <v-list-item-subtitle>34</v-list-item-subtitle>
+                        <v-list-item-subtitle>45 ouverts</v-list-item-subtitle>
                     </v-list-item>
 
                     <v-list-item
                         density="compact"
-                        prepend-icon="mdi-gender-female"
+                        prepend-icon="mdi-folder-lock"
                     >
-                        <v-list-item-subtitle>30</v-list-item-subtitle>
+                        <v-list-item-subtitle>39 clos</v-list-item-subtitle>
                     </v-list-item>
                     </div>
 
@@ -178,7 +178,7 @@
                     <v-card-actions>
                     <v-btn
                         :text="'Détail'"
-                        :to="'/team'"
+                        :to="'/projects'"
                     ></v-btn>
                     </v-card-actions>
                 </v-card>
@@ -242,7 +242,7 @@
     const time = ref(0)
     const updateTrigger = ref(0)
 
-    const caCurrent = 90_000
+    const caCurrent = 160_000
     const caGoal = 100_000
     const caTarget = (caCurrent / caGoal) * 100
     const caRemaining = computed(() => caGoal - caCurrent)
