@@ -1,12 +1,13 @@
 <template>
-  <div>
-    <v-card class="mx-auto pa-12 pb-8" elevation="3" max-width="448" rounded="xl">
-      <div class="text-body-large text-medium-emphasis">Account</div>
+  <div class="d-flex align-center justify-center pa-4 fill-height">
+    <v-card class="mx-auto pa-10 pb-8" elevation="8" max-width="460" rounded="xl">
+      <div class="text-h4 font-weight-bold mb-1">Account</div>
+      <div class="text-body-1 text-medium-emphasis mb-6">Connecte-toi pour accéder au dashboard</div>
 
       <v-text-field density="compact" placeholder="Email address" prepend-inner-icon="mdi-email-outline"
-        variant="outlined" v-model="userData.email"></v-text-field>
+        variant="outlined" class="mb-2" v-model="userData.email"></v-text-field>
 
-      <div class="text-body-large text-medium-emphasis d-flex align-center justify-space-between">
+      <div class="text-body-large text-medium-emphasis d-flex align-center justify-space-between mb-1">
         Password
 
         <a class="text-body-small text-decoration-none text-blue" href="#" rel="noopener noreferrer" target="_blank">
@@ -15,12 +16,12 @@
 
       <v-text-field :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'" :type="visible ? 'text' : 'password'"
         density="compact" placeholder="Enter your password" prepend-inner-icon="mdi-lock-outline" variant="outlined"
-        @click:append-inner="visible = !visible" v-model="userData.pass"></v-text-field>
+        @click:append-inner="visible = !visible" class="mb-2" v-model="userData.pass"></v-text-field>
 
       <v-expand-transition>
         <v-alert
           v-if="error"
-          class="mb-6 login-alert"
+          class="mb-6 mt-2"
           type="error"
           variant="tonal"
           rounded="xl"
@@ -31,7 +32,7 @@
         </v-alert>
       </v-expand-transition>
 
-      <v-btn class="mb-8 login-btn" color="blue" size="large" variant="flat" block @click="login">
+      <v-btn class="mb-8 font-weight-bold rounded-pill text-none" color="blue" size="large" variant="flat" block @click="login">
         Log In
       </v-btn>
     </v-card>
@@ -77,19 +78,3 @@ const login = async () => {
     }
 }
 </script>
-
-<style scoped>
-.login-alert {
-  border: 1px solid rgba(244, 67, 54, 0.35);
-  backdrop-filter: blur(3px);
-}
-
-.login-btn {
-  border-radius: 999px;
-  border: 1px solid rgba(30, 136, 229, 0.45);
-  letter-spacing: 0.2px;
-  font-weight: 600;
-  text-transform: none;
-  box-shadow: 0 10px 24px -16px rgba(30, 136, 229, 0.9);
-}
-</style>
