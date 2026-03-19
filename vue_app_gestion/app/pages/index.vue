@@ -52,36 +52,6 @@
                     </v-list-item>
                     </div>
 
-                    <v-expand-transition>
-                    <div v-if="expand">
-                        <div class="py-2">
-                        <v-slider
-                            v-model="time"
-                            :max="6"
-                            :step="1"
-                            :ticks="labels"
-                            class="mx-4"
-                            color="primary"
-                            density="compact"
-                            show-ticks="always"
-                            thumb-size="10"
-                            hide-details
-                        ></v-slider>
-                        </div>
-
-                        <v-list class="bg-transparent">
-                        <v-list-item
-                            v-for="item in forecast"
-                            :key="item.day"
-                            :append-icon="item.icon"
-                            :subtitle="item.temp"
-                            :title="item.day"
-                        >
-                        </v-list-item>
-                        </v-list>
-                    </div>
-                    </v-expand-transition>
-
                     <v-divider></v-divider>
 
                     <v-card-actions>
@@ -143,36 +113,6 @@
                     </v-list-item>
                     </div>
 
-                    <v-expand-transition>
-                    <div v-if="expand">
-                        <div class="py-2">
-                        <v-slider
-                            v-model="time"
-                            :max="6"
-                            :step="1"
-                            :ticks="labels"
-                            class="mx-4"
-                            color="primary"
-                            density="compact"
-                            show-ticks="always"
-                            thumb-size="10"
-                            hide-details
-                        ></v-slider>
-                        </div>
-
-                        <v-list class="bg-transparent">
-                        <v-list-item
-                            v-for="item in forecast"
-                            :key="item.day"
-                            :append-icon="item.icon"
-                            :subtitle="item.temp"
-                            :title="item.day"
-                        >
-                        </v-list-item>
-                        </v-list>
-                    </div>
-                    </v-expand-transition>
-
                     <v-divider></v-divider>
 
                     <v-card-actions>
@@ -207,7 +147,6 @@
                     </div>
 
                     <v-progress-circular
-                        :key="`ca_${updateTrigger}`"
                         :model-value="caTarget"
                         :size="128"
                         :width="13"
@@ -229,18 +168,7 @@
 
 
 <script setup>
-    import { computed, onMounted, ref } from 'vue'
-
-    const labels = { 0: 'SU', 1: 'MO', 2: 'TU', 3: 'WED', 4: 'TH', 5: 'FR', 6: 'SA' }
-    const forecast = [
-        { day: 'Tuesday', icon: 'mdi-white-balance-sunny', temp: '24\u00B0/12\u00B0' },
-        { day: 'Wednesday', icon: 'mdi-white-balance-sunny', temp: '22\u00B0/14\u00B0' },
-        { day: 'Thursday', icon: 'mdi-cloud', temp: '25\u00B0/15\u00B0' },
-    ]
-
-    const expand = ref(false)
-    const time = ref(0)
-    const updateTrigger = ref(0)
+    import { computed } from 'vue'
 
     const caCurrent = 160_000
     const caGoal = 100_000
@@ -256,7 +184,4 @@
         return new Intl.NumberFormat('fr-FR').format(value) + '€'
     }
 
-    onMounted(() => {
-        updateTrigger.value++
-    })
 </script>
