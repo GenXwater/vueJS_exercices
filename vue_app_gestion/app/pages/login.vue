@@ -1,6 +1,13 @@
 <template>
   <div class="d-flex align-center justify-center pa-4 fill-height">
-    <v-card class="mx-auto pa-10 pb-8" elevation="8" max-width="460" rounded="xl">
+    <v-card
+      class="mx-auto px-12 pt-11 pb-10"
+      color="surface"
+      elevation="8"
+      width="100%"
+      max-width="500"
+      rounded="xl"
+    >
       <div class="text-h4 font-weight-bold mb-1">Account</div>
       <div class="text-body-1 text-medium-emphasis mb-6">Connecte-toi pour accéder au dashboard</div>
 
