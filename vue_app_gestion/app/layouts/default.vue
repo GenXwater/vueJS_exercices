@@ -22,6 +22,7 @@
                 color="primary"
                 rounded="xl"
                 :to="item.url"
+                @click="item.action && item.action()"
               >
                 <v-list-item-title v-text="item.text"></v-list-item-title>
 
@@ -89,8 +90,14 @@
     { text: 'Reports', icon: 'mdi-file-chart', url: "/reports" },
   ]
 
+  const logout = async () => {
+    localStorage.removeItem('isAdmin')
+    showContent.value = false
+    await navigateTo('/login')
+  }
+
   const options = [
     { text: 'Options', icon: 'mdi-view-dashboard', url: '/options' },
-    { text: 'Se déconnecter', icon: 'mdi-account-group', url: "/Logout" },
+    { text: 'Se déconnecter', icon: 'mdi-logout', url: '/login', action: logout },
   ]
 </script>

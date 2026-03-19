@@ -41,3 +41,9 @@
         </v-app>
     </ClientOnly>
 </template>
+
+<script setup lang="ts">
+    const options = [
+        { text: 'Connexion', icon: 'mdi-login', url: '/login' },
+    ]
+</script>

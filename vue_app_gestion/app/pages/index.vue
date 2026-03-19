@@ -23,7 +23,7 @@
                         class="text-display-large font-weight-light"
                         cols="6"
                         >
-                        {{ usersData.length }}
+                        {{ usersData?.length ?? 0 }}
                         </v-col>
 
                         <v-col class="text-right" cols="6">
