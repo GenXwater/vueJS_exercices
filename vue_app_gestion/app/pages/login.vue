@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex align-center justify-center pa-4 fill-height">
+  <div class="d-flex align-center justify-center pa-4 pt-12 fill-height">
     <v-card
       class="mx-auto px-12 pt-11 pb-10"
       color="surface"
