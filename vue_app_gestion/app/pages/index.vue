@@ -3,7 +3,7 @@
     <v-container>
         <v-row>
             <v-col>
-                <v-card class="mx-auto rounded-xl pa-2" max-width="368">
+                <v-card class="mx-auto rounded-xl pa-2" max-width="368" v-if="usersData">
                     <v-card-item title="Utilisateurs">
                     <template v-slot:subtitle>
                         <v-icon
@@ -23,7 +23,7 @@
                         class="text-display-large font-weight-light"
                         cols="6"
                         >
-                        {{ usersData?.length ?? 0 }}
+                        {{ usersData.length }}
                         </v-col>
 
                         <v-col class="text-right" cols="6">
@@ -64,7 +64,7 @@
             </v-col>
 
             <v-col>
-                <v-card class="mx-auto rounded-xl pa-2" max-width="368">
+                <v-card class="mx-auto rounded-xl pa-2" max-width="368" v-if="projectsData">
                     <v-card-item title="Projets">
                     <template v-slot:subtitle>
                         <v-icon
@@ -84,7 +84,7 @@
                         class="text-display-large font-weight-light"
                         cols="6"
                         >
-                        84
+                        {{ projectsData.length }}
                         </v-col>
 
                         <v-col class="text-right" cols="6">
@@ -185,5 +185,6 @@
     }
 
     const { data: usersData } = await useFetch(`http://localhost:3002/users`)
+    const { data: projectsData } = await useFetch(`http://localhost:3002/projects`)
 
 </script>
