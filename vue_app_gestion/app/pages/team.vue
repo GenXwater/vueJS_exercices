@@ -1,9 +1,8 @@
 <template>
     <v-container>
         <h1>L'équipe</h1>
-        <ul>
-            <li v-for="user in usersData" :key="user.id">{{ user.email }}</li>
-        </ul>
+        <v-data-table :items="usersData" v-if="usersData"></v-data-table>
+        <v-skeleton-loader type="article" v-else></v-skeleton-loader>
     </v-container>
 </template>
 
