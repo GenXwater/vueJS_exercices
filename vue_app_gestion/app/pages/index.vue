@@ -23,7 +23,7 @@
                         class="text-display-large font-weight-light"
                         cols="6"
                         >
-                        64
+                        {{ usersData.length }}
                         </v-col>
 
                         <v-col class="text-right" cols="6">
@@ -167,7 +167,7 @@
 </template>
 
 
-<script setup>
+<script setup lang="ts">
     import { computed } from 'vue'
 
     const caCurrent = 160_000
@@ -183,5 +183,7 @@
     function formatEuros(value) {
         return new Intl.NumberFormat('fr-FR').format(value) + '€'
     }
+
+    const { data: usersData } = await useFetch(`http://localhost:3002/users`)
 
 </script>
