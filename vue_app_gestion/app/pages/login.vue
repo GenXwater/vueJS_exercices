@@ -45,4 +45,33 @@ const visible = ref(false)
 definePageMeta({
     layout: 'login'
 })
+
+const userData = ref({
+    email: '',
+    pass: '',
+})
+
+const error = ref(false)
+
+const login = async () => {
+    error.value = false
+
+    try {
+        const { data: responseData } = await useFetch(
+            `http://localhost:3002/checkUser?email=${(userData.value.email)}&pass=${(userData.value.pass)}`,
+            {
+                method: 'GET',
+            }
+        )
+
+        if (!responseData.value || responseData.value.length === 0) {
+            error.value = true
+        } else {
+            localStorage.setItem("isAdmin", "true"); // pas sécurisé mais ce n'est pas le but du cours.
+            navigateTo("/");
+        }
+    } catch {
+        error.value = true
+    }
+}
 </script>
