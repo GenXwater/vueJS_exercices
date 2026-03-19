@@ -65,7 +65,7 @@ const login = async () => {
             }
         })
 
-        if (!responseData.value || responseData.value.length === 0) {
+        if (!responseData || responseData.length === 0) {
             error.value = true
         } else {
             localStorage.setItem("isAdmin", "true"); // pas sécurisé mais ce n'est pas le but du cours.
