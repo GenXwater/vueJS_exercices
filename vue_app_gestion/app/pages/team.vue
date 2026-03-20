@@ -13,7 +13,7 @@
         <v-data-table :headers="headers" :items="usersData" v-if="usersData" class="rounded-xl">
             <!-- Boutton suppr -->
             <template v-slot:item.actions="{ item }">
-                <v-icon icon="mdi-delete" size="small" @click="openDeleteDialog(item.id, item.email)" />
+                    <v-icon class="ps-6" icon="mdi-delete" size="small" @click="openDeleteDialog(item.id, item.email)" />
             </template>
         </v-data-table>
         <v-skeleton-loader type="article" v-else></v-skeleton-loader>
@@ -155,6 +155,6 @@
         { title: 'Email', key:"email" },
         { title: 'Pass', key:"pass" },
         { title: 'Admin', key:"isAdmin" },
-        { title: 'Actions', key:"actions", sortable: false }, // actions connu par vuetify pour créer des actions
+        { title: 'Actions', key:"actions", sortable: false, }, // actions connu par vuetify pour créer des actions
     ])
 </script>
