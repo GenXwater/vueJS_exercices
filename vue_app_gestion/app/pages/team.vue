@@ -6,17 +6,22 @@
                 prepend-icon="mdi-plus"
                 rounded="pill"
                 text="Ajouter"
-                @click="dialog = true"
+                @click="dialogAdd = true"
             />
         </div>
 
-        <v-data-table :headers="headers" :items="usersData" v-if="usersData" class="rounded-xl"></v-data-table>
+        <v-data-table :headers="headers" :items="usersData" v-if="usersData" class="rounded-xl">
+            <!-- Boutton suppr -->
+            <template v-slot:item.actions="{ item }">
+                <v-icon icon="mdi-delete" size="small" @click="openDeleteDialog(item.id, item.email)" />
+            </template>
+        </v-data-table>
         <v-skeleton-loader type="article" v-else></v-skeleton-loader>
 
-        <v-dialog v-model="dialog" max-width="560">
+        <v-dialog v-model="dialogAdd" max-width="560">
             <v-card class="px-12 pt-11 pb-10 rounded-xl"> 
                 <div class="d-flex align-center justify-space-between mb-1">
-                    <div class="text-h4 font-weight-bold">Créer un utilisateur</div>
+                    <v-card-title class="text-h4 font-weight-bold">Créer un utilisateur</v-card-title>
                     <v-btn icon="mdi-close" variant="text" density="comfortable" @click="closeDialog" />
                 </div>
                 <div class="text-body-1 text-medium-emphasis mb-6">Renseigne les informations du compte</div>
@@ -56,6 +61,18 @@
                 </v-btn>
             </v-card>
         </v-dialog>
+
+        <v-dialog v-model="deleteDialog" max-width="420">
+            <v-card class="px-12 pt-11 pb-10 rounded-xl">
+                <v-card-title class="texte-h4">Supprimer cet utilisateur ?</v-card-title>
+                <v-card-text>{{ mailToDelete }}</v-card-text>
+                <v-card-actions>
+                    <v-spacer />
+                    <v-btn variant="text" @click="deleteDialog = false">Annuler</v-btn>
+                    <v-btn color="error" @click="confirmeDelete">Supprimer</v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
     </v-container>
 </template>
 
@@ -66,8 +83,11 @@
 
     // VAR ----------------------------------- //
 
-    const dialog = ref(false)
+    const dialogAdd = ref(false)
+    const deleteDialog = ref(false)
     const visible = ref(false)
+    const mailToDelete = ref('')
+    const idToDelete = ref(-1)
     
     const formUser = ref({
         email: '',
@@ -77,7 +97,7 @@
     const { data: usersData, refresh } = await useFetch(USERS_API_URL)
 
     const closeDialog = () => {
-        dialog.value = false
+        dialogAdd.value = false
         visible.value = false
     }
     // ---------------------------------------- //
@@ -106,6 +126,28 @@
         closeDialog()
         refresh()
     }
+
+    const openDeleteDialog = (id: any, email: any) => {
+        idToDelete.value = id
+        mailToDelete.value = email
+        deleteDialog.value = true
+    }
+
+    
+        const confirmeDelete = async () => {
+            await $fetch(`${USERS_API_URL}?id=${idToDelete.value}`, {
+                method: 'DELETE',
+            })
+
+            closeDelete()
+            refresh()
+        }
+
+        const closeDelete = () => {
+            deleteDialog.value = false
+            idToDelete.value = -1
+            mailToDelete.value = ''
+        }
 
     // HEADERS
     const headers = ref([
