@@ -15,7 +15,7 @@
         <v-skeleton-loader type="article" v-else></v-skeleton-loader>
 
         <v-dialog v-model="dialog" max-width="560">
-            <v-card class="px-12 pt-11 pb-10" rounded="xl">
+            <v-card class="px-12 pt-11 pb-10" rounded="xl"> 
                 <div class="d-flex align-center justify-space-between mb-1">
                     <div class="text-h4 font-weight-bold">Créer un utilisateur</div>
                     <v-btn icon="mdi-close" variant="text" density="comfortable" @click="closeDialog" />
@@ -75,9 +75,6 @@
     const { data: usersData, refresh: refreshUsers } = await useFetch(USERS_API_URL)
 
     const closeDialog = () => {
-        form.value.email = ''
-        form.value.pass = ''
-        visible.value = false
         dialog.value = false
     }
 
