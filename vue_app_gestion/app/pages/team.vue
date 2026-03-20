@@ -24,7 +24,7 @@
 
                 <div class="text-body-large text-medium-emphasis mb-1">Mail</div>
                 <v-text-field
-                    v-model="form.email"
+                    v-model="formUser.email"
                     density="compact"
                     placeholder="Email address"
                     prepend-inner-icon="mdi-email-outline"
@@ -34,7 +34,7 @@
 
                 <div class="text-body-large text-medium-emphasis mb-1">Mot de passe</div>
                 <v-text-field
-                    v-model="form.pass"
+                    v-model="formUser.pass"
                     :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
                     :type="visible ? 'text' : 'password'"
                     density="compact"
@@ -65,34 +65,46 @@
 
     const USERS_API_URL = 'http://localhost:3002/users'
 
+    // VAR ----------------------------------- //
+
     const dialog = ref(false)
     const visible = ref(false)
-    const form = ref({
+    
+    const formUser = ref({
         email: '',
         pass: '',
     })
 
-    const { data: usersData, refresh: refreshUsers } = await useFetch(USERS_API_URL)
+    const { data: usersData, refresh } = await useFetch(USERS_API_URL)
 
     const closeDialog = () => {
         dialog.value = false
+        visible.value = false
     }
+    // ---------------------------------------- //
+    
+    // FUNCTIONS
 
     const addUser = async () => {
-        const email = form.value.email.trim()
-        const pass = form.value.pass.trim()
+        const email = formUser.value.email.trim()
+        const pass = formUser.value.pass.trim()
 
         if (!email || !pass) return
 
-        await $fetch(USERS_API_URL, {
+        const createdUser = await $fetch(USERS_API_URL, {
             method: 'POST',
             body: {
                 email,
                 pass,
             },
         })
+        
+        // console.log(`User crée :`, createdUser)
+
+        formUser.value.email = ''
+        formUser.value.pass = ''
 
         closeDialog()
-        await refreshUsers()
+        refresh()
     }
 </script>
