@@ -10,7 +10,7 @@
             />
         </div>
 
-        <v-data-table :items="usersData" v-if="usersData" class="rounded-xl"></v-data-table>
+        <v-data-table :headers="headers" :items="usersData" v-if="usersData" class="rounded-xl"></v-data-table>
         <v-skeleton-loader type="article" v-else></v-skeleton-loader>
 
         <v-dialog v-model="dialog" max-width="560">
@@ -106,4 +106,13 @@
         closeDialog()
         refresh()
     }
+
+    // HEADERS
+    const headers = ref([
+        { title: 'ID', key:"id" }, // key correspondant aux noms défini dans la db
+        { title: 'Email', key:"email" },
+        { title: 'Pass', key:"pass" },
+        { title: 'Admin', key:"isAdmin" },
+        { title: 'Actions', key:"actions", sortable: false }, // actions connu par vuetify pour créer des actions
+    ])
 </script>
