@@ -6,7 +6,6 @@
                 prepend-icon="mdi-plus"
                 rounded="pill"
                 text="Ajouter"
-                border
                 @click="dialog = true"
             />
         </div>
@@ -15,7 +14,7 @@
         <v-skeleton-loader type="article" v-else></v-skeleton-loader>
 
         <v-dialog v-model="dialog" max-width="560">
-            <v-card class="px-12 pt-11 pb-10" rounded="xl"> 
+            <v-card class="px-12 pt-11 pb-10 rounded-xl"> 
                 <div class="d-flex align-center justify-space-between mb-1">
                     <div class="text-h4 font-weight-bold">Créer un utilisateur</div>
                     <v-btn icon="mdi-close" variant="text" density="comfortable" @click="closeDialog" />
