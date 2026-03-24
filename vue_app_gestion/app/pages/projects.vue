@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <div class="d-flex align-center justify-space-between mb-4">
-            <h1 class="ma-0">L'équipe</h1>
+            <h1 class="ma-0">Projets</h1>
             <v-btn
                 prepend-icon="mdi-plus"
                 rounded="pill"
@@ -16,7 +16,6 @@
                     <v-col cols="12" md="4">
                         <project-single :project="leProjet" />
                     </v-col>
-
             </template>
         </v-row>
 
@@ -28,7 +27,13 @@
                     <v-btn icon="mdi-close" variant="text" density="comfortable" @click="closeDialog" />
                 </div>
                 <div class="text-body-1 text-medium-emphasis mb-6">Renseigne les informations du projet</div>
-
+                <v-textarea
+                    label="Description"
+                    row-height="25"
+                    rows="3"
+                    variant="outlined"
+                    auto-grow
+                ></v-textarea>
                 <v-btn
                     class="font-weight-bold rounded-pill text-none"
                     color="blue"
