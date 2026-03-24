@@ -49,13 +49,17 @@
                         class="mb-6"
                     ></v-textarea>
 
-                    <v-combobox
+                    <v-autocomplete
                         v-model="user.value.value"
                         :error-messages="user.errorMessage.value"
+                        :items="userEmails"
+                        :loading="usersStatus === 'pending'"
                         label="Utilisateur"
-                        placeholder="Tape un utilisateur puis Entrée"
+                        placeholder="Sélectionne un utilisateur"
+                        no-data-text="Aucun email utilisateur trouvé"
                         prepend-inner-icon="mdi-account-outline"
                         variant="outlined"
+                        clearable
                         chips
                         closable-chips
                         class="mb-6"
@@ -91,13 +95,27 @@
 </template>
 
 <script setup lang="ts">
-    import { ref } from 'vue'
+    import { computed, ref } from 'vue'
     import ProjectSingle from '~/components/ProjectSingle.vue';
     import { useField, useForm } from 'vee-validate';
 
     const dialogAddProject = ref(false)
 
-    const { data, refresh } = await useFetch('http://localhost:3002/projects')
+    const PROJECTS_API_URL = 'http://localhost:3002/projects'
+    const USERS_API_URL = 'http://localhost:3002/users'
+
+    type UserApi = {
+        email: string
+    }
+
+    const { data, refresh } = await useFetch(PROJECTS_API_URL)
+    const { data: usersData, status: usersStatus } = await useFetch<UserApi[]>(USERS_API_URL)
+
+    const userEmails = computed(() => {
+        return (usersData.value ?? [])
+            .map((u) => u.email)
+            .filter((email): email is string => Boolean(email))
+    })
 
     
     const { handleSubmit, handleReset } = useForm({
@@ -107,8 +125,9 @@
                 return `Le nom doit contenir au moins 3 caractères`
             },
             user (value:any) {
-                if (/^[0-9]{1,}$/.test(value)) return true
-                return `Il faut au moins 1 chiffre`
+                if (!value) return `Veuillez sélectionner un utilisateur`
+                if (!userEmails.value.includes(value)) return `Cet email n existe pas`
+                return true
             },
             desc (value:any) {
                 if (value?.length >= 1) return true
@@ -137,7 +156,7 @@
     }
 
     const createProject = async (p:any) => {
-        const { data: responseData } = await useFetch(`http://localhost:3002/projects`, {
+        const { data: responseData } = await useFetch(PROJECTS_API_URL, {
             method: 'post',
             body: p
         })
