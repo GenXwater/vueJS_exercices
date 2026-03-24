@@ -28,6 +28,7 @@
                 </div>
                 <div class="text-body-1 text-medium-emphasis mb-6">Renseigne les informations du projet</div>
                 <v-textarea
+                    v-model="projectDescription"
                     label="Description"
                     row-height="25"
                     rows="3"
@@ -47,16 +48,27 @@
                     class="mb-6"
                 />
 
-                <v-btn
-                    class="font-weight-bold rounded-pill text-none"
-                    color="blue"
-                    size="large"
-                    variant="flat"
-                    block
-                    @click="closeDialog"
-                >
-                    Ajouter
-                </v-btn>
+                <div class="d-flex ga-3">
+                    <v-btn
+                        class="font-weight-bold rounded-pill text-none"
+                        style="flex: 1"
+                        size="large"
+                        variant="outlined"
+                        @click="resetForm"
+                    >
+                        Réinitialiser
+                    </v-btn>
+                    <v-btn
+                        class="font-weight-bold rounded-pill text-none"
+                        style="flex: 1"
+                        color="blue"
+                        size="large"
+                        variant="flat"
+                        @click="closeDialog"
+                    >
+                        Ajouter
+                    </v-btn>
+                </div>
             </v-card>
         </v-dialog>
     </v-container>
@@ -68,7 +80,13 @@ import { ref } from 'vue'
 import ProjectSingle from '~/components/ProjectSingle.vue';
 
 const dialogAddProject = ref(false)
+const projectDescription = ref('')
 const projectUsers = ref<string[]>([])
+
+const resetForm = () => {
+    projectDescription.value = ''
+    projectUsers.value = []
+}
 
 const closeDialog = () => {
     dialogAddProject.value = false
