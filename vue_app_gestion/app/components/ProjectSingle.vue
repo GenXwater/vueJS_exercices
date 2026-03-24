@@ -21,7 +21,7 @@
     </v-card-text>
 
     <v-card-actions>
-      <v-btn color="orange" text="Voir"></v-btn>
+      <v-btn color="orange" text="Voir" @click="GoToProject(project.id)"></v-btn>
 
       <v-btn color="orange" text="Fermer"></v-btn>
     </v-card-actions>
@@ -29,13 +29,22 @@
 </template>
 
 <script setup lang="ts">
-    type ProjectProps = {
-        project: Object;
-    }
+  type Project = {
+    id: string
+    name: string
+    desc: string
+  }
+  type ProjectProps = {
+      project: Project;
+  }
 
-    const props = defineProps<ProjectProps>();
+  const props = defineProps<ProjectProps>();
 
-    const getRandomImage = () => {
-        return "https://random.imagecdn.app/300/240";
-    }
+  const getRandomImage = () => {
+      return "https://random.imagecdn.app/300/240";
+  }
+
+  const GoToProject = (id:any) => {
+    console.log(id)
+  }
 </script>
