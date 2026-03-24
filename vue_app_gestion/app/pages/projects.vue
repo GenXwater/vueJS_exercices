@@ -22,14 +22,16 @@
         <!-- CREATION PROJECT -->
         <v-dialog v-model="dialogAddProject" max-width="560">
             <v-card class="px-12 pt-11 pb-10 rounded-xl">
-                <v-form @submit.prevent="submit">
+                <form @submit.prevent="submit">
                     <div class="d-flex align-center justify-space-between mb-1">
                         <v-card-title class="text-h4 font-weight-bold ps-0">Ajouter un projet</v-card-title>
-                        <v-btn icon="mdi-close" variant="text" density="comfortable" @click="closeDialog" />
+                        <v-btn type="button" icon="mdi-close" variant="text" density="comfortable" @click="closeDialog" />
                     </div>
                     <div class="text-body-1 text-medium-emphasis mb-6">Renseigne les informations du projet</div>
                     <v-text-field
-                        v-model="projectName"
+                        v-model="name.value.value"
+                        :counter="3"
+                        :error-messages="name.errorMessage.value"
                         label="Nom"
                         placeholder="Tape le nom du projet"
                         prepend-inner-icon="mdi-folder-outline"
@@ -38,21 +40,24 @@
                     />
                     
                     <v-textarea
-                        v-model="projectDescription"
+                        v-model="desc.value.value"
+                        :error-messages="desc.errorMessage.value"
                         label="Description"
                         row-height="25"
                         rows="3"
                         variant="outlined"
                         auto-grow
+                        class="mb-6"
                     ></v-textarea>
 
                     <v-combobox
-                        v-model="projectUsers"
-                        label="Utilisateurs"
+                        v-model="user.value.value"
+                        :counter="1"
+                        :error-messages="user.errorMessage.value"
+                        label="Utilisateur"
                         placeholder="Tape un utilisateur puis Entrée"
                         prepend-inner-icon="mdi-account-outline"
                         variant="outlined"
-                        multiple
                         chips
                         closable-chips
                         class="mb-6"
@@ -64,22 +69,23 @@
                             style="flex: 1"
                             size="large"
                             variant="outlined"
-                            @click="resetForm"
+                            type="button"
+                            @click="resetProjectForm"
                         >
                             Réinitialiser
                         </v-btn>
                         <v-btn
                             class="font-weight-bold rounded-pill text-none"
+                            type="submit"
                             style="flex: 1"
                             color="blue"
                             size="large"
                             variant="flat"
-                            @click="closeDialog"
                         >
                             Ajouter
                         </v-btn>
                     </div>
-                </v-form>
+                </form>
             </v-card>
         </v-dialog>
     </v-container>
@@ -87,21 +93,59 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import ProjectSingle from '~/components/ProjectSingle.vue';
+    import { ref } from 'vue'
+    import ProjectSingle from '~/components/ProjectSingle.vue';
+    import { useField, useForm } from 'vee-validate';
 
-const dialogAddProject = ref(false)
-const projectDescription = ref('')
-const projectUsers = ref<string[]>([])
+    const dialogAddProject = ref(false)
 
-const resetForm = () => {
-    projectDescription.value = ''
-    projectUsers.value = []
-}
+    const { data, refresh } = await useFetch('http://localhost:3002/projects')
 
-const closeDialog = () => {
-    dialogAddProject.value = false
-}
+    
+    const { handleSubmit, handleReset } = useForm({
+        validationSchema: {
+            name (value:any) {
+                if (value?.length >= 3) return true
+                return `Le nom doit contenir au moins 3 caractères`
+            },
+            user (value:any) {
+                if (/^[0-9]{1,}$/.test(value)) return true
+                return `Il faut au moins 1 chiffre`
+            },
+            desc (value:any) {
+                if (value?.length >= 1) return true
+                return `La description doit contenir au moins 1 caractère`
+            },
+        },
+    })
 
-const { data } = await useFetch(`http://localhost:3002/projects`)
+    const name = useField('name')
+    const user = useField('user')
+    const desc = useField('desc')
+
+    const submit = handleSubmit(async (values) => {
+        // alert(JSON.stringify(values, null, 2))
+        await createProject(values)
+        closeDialog()
+    })
+
+    const closeDialog = () => {
+        resetProjectForm()
+        dialogAddProject.value = false
+    }
+
+    const resetProjectForm = () => {
+        handleReset()
+    }
+
+    const createProject = async (p:any) => {
+        const { data: responseData } = await useFetch(`http://localhost:3002/projects`, {
+            method: 'post',
+            body: p
+        })
+
+        if (responseData.value)
+            refresh()
+    }
+        
 </script>
