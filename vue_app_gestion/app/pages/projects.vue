@@ -21,54 +21,65 @@
 
         <!-- CREATION PROJECT -->
         <v-dialog v-model="dialogAddProject" max-width="560">
-            <v-card class="px-12 pt-11 pb-10 rounded-xl"> 
-                <div class="d-flex align-center justify-space-between mb-1">
-                    <v-card-title class="text-h4 font-weight-bold ps-0">Ajouter un projet</v-card-title>
-                    <v-btn icon="mdi-close" variant="text" density="comfortable" @click="closeDialog" />
-                </div>
-                <div class="text-body-1 text-medium-emphasis mb-6">Renseigne les informations du projet</div>
-                <v-textarea
-                    v-model="projectDescription"
-                    label="Description"
-                    row-height="25"
-                    rows="3"
-                    variant="outlined"
-                    auto-grow
-                ></v-textarea>
-
-                <v-combobox
-                    v-model="projectUsers"
-                    label="Utilisateurs"
-                    placeholder="Tape un utilisateur puis Entrée"
-                    prepend-inner-icon="mdi-account-outline"
-                    variant="outlined"
-                    multiple
-                    chips
-                    closable-chips
-                    class="mb-6"
-                />
-
-                <div class="d-flex ga-3">
-                    <v-btn
-                        class="font-weight-bold rounded-pill text-none"
-                        style="flex: 1"
-                        size="large"
+            <v-card class="px-12 pt-11 pb-10 rounded-xl">
+                <v-form @submit.prevent="submit">
+                    <div class="d-flex align-center justify-space-between mb-1">
+                        <v-card-title class="text-h4 font-weight-bold ps-0">Ajouter un projet</v-card-title>
+                        <v-btn icon="mdi-close" variant="text" density="comfortable" @click="closeDialog" />
+                    </div>
+                    <div class="text-body-1 text-medium-emphasis mb-6">Renseigne les informations du projet</div>
+                    <v-text-field
+                        v-model="projectName"
+                        label="Nom"
+                        placeholder="Tape le nom du projet"
+                        prepend-inner-icon="mdi-folder-outline"
                         variant="outlined"
-                        @click="resetForm"
-                    >
-                        Réinitialiser
-                    </v-btn>
-                    <v-btn
-                        class="font-weight-bold rounded-pill text-none"
-                        style="flex: 1"
-                        color="blue"
-                        size="large"
-                        variant="flat"
-                        @click="closeDialog"
-                    >
-                        Ajouter
-                    </v-btn>
-                </div>
+                        class="mb-6"
+                    />
+                    
+                    <v-textarea
+                        v-model="projectDescription"
+                        label="Description"
+                        row-height="25"
+                        rows="3"
+                        variant="outlined"
+                        auto-grow
+                    ></v-textarea>
+
+                    <v-combobox
+                        v-model="projectUsers"
+                        label="Utilisateurs"
+                        placeholder="Tape un utilisateur puis Entrée"
+                        prepend-inner-icon="mdi-account-outline"
+                        variant="outlined"
+                        multiple
+                        chips
+                        closable-chips
+                        class="mb-6"
+                    />
+
+                    <div class="d-flex ga-3">
+                        <v-btn
+                            class="font-weight-bold rounded-pill text-none"
+                            style="flex: 1"
+                            size="large"
+                            variant="outlined"
+                            @click="resetForm"
+                        >
+                            Réinitialiser
+                        </v-btn>
+                        <v-btn
+                            class="font-weight-bold rounded-pill text-none"
+                            style="flex: 1"
+                            color="blue"
+                            size="large"
+                            variant="flat"
+                            @click="closeDialog"
+                        >
+                            Ajouter
+                        </v-btn>
+                    </div>
+                </v-form>
             </v-card>
         </v-dialog>
     </v-container>
