@@ -30,7 +30,6 @@
                     <div class="text-body-1 text-medium-emphasis mb-6">Renseigne les informations du projet</div>
                     <v-text-field
                         v-model="name.value.value"
-                        :counter="3"
                         :error-messages="name.errorMessage.value"
                         label="Nom"
                         placeholder="Tape le nom du projet"
@@ -52,7 +51,6 @@
 
                     <v-combobox
                         v-model="user.value.value"
-                        :counter="1"
                         :error-messages="user.errorMessage.value"
                         label="Utilisateur"
                         placeholder="Tape un utilisateur puis Entrée"
