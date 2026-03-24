@@ -34,6 +34,19 @@
                     variant="outlined"
                     auto-grow
                 ></v-textarea>
+
+                <v-combobox
+                    v-model="projectUsers"
+                    label="Utilisateurs"
+                    placeholder="Tape un utilisateur puis Entrée"
+                    prepend-inner-icon="mdi-account-outline"
+                    variant="outlined"
+                    multiple
+                    chips
+                    closable-chips
+                    class="mb-6"
+                />
+
                 <v-btn
                     class="font-weight-bold rounded-pill text-none"
                     color="blue"
@@ -55,6 +68,7 @@ import { ref } from 'vue'
 import ProjectSingle from '~/components/ProjectSingle.vue';
 
 const dialogAddProject = ref(false)
+const projectUsers = ref<string[]>([])
 
 const closeDialog = () => {
     dialogAddProject.value = false
