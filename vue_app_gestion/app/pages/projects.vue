@@ -12,9 +12,9 @@
 
         <!--- Liste de projets -->
         <v-row>
-            <template v-for="leProjet in data"> 
+            <template v-for="leProjet in data" :key="leProjet.id"> 
                     <v-col cols="12" md="4">
-                        <project-single :project="leProjet" />
+                        <project-single :project="leProjet" @delete-project="deleteProjectById" />
                     </v-col>
             </template>
         </v-row>
@@ -98,6 +98,7 @@
     import { computed, ref } from 'vue'
     import ProjectSingle from '~/components/ProjectSingle.vue';
     import { useField, useForm } from 'vee-validate';
+    import type { Project } from '~/types/project'
 
     const dialogAddProject = ref(false)
 
@@ -107,8 +108,7 @@
     type UserApi = {
         email: string
     }
-
-    const { data, refresh } = await useFetch(PROJECTS_API_URL)
+    const { data, refresh } = await useFetch<Project[]>(PROJECTS_API_URL)
     const { data: usersData, status: usersStatus } = await useFetch<UserApi[]>(USERS_API_URL)
 
     const userEmails = computed(() => {
@@ -156,13 +156,21 @@
     }
 
     const createProject = async (p:any) => {
-        const { data: responseData } = await useFetch(PROJECTS_API_URL, {
+        await $fetch(PROJECTS_API_URL, {
             method: 'post',
             body: p
         })
 
-        if (responseData.value)
-            refresh()
+        refresh()
     }
+
+    const deleteProjectById = async (projectId: string) => {
+        await $fetch(`${PROJECTS_API_URL}?id=${projectId}`, {
+            method: 'DELETE'
+        })
+
+        refresh()
+    }
+
         
 </script>
