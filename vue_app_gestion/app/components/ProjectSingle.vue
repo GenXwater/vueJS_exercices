@@ -44,7 +44,8 @@
       return "https://random.imagecdn.app/300/240";
   }
 
-  const GoToProject = (id:any) => {
-    console.log(id)
+  const GoToProject =  (id:string) => {
+    // console.log(id)
+    navigateTo(`/project-${id}`)
   }
 </script>
