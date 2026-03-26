@@ -18,12 +18,12 @@
 
 <style>
     .tuk-button {
-        padding: 10px 20 px;
+        padding: 10px 20px;
         border-radius: 25px;
         border: none;
     }
 
-    tuk-primary {
+    .tuk-primary {
         color: white;
         background-color: cornflowerblue;
     }

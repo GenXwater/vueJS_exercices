@@ -6,5 +6,5 @@ export default {
     install: (app: App<Element>) => {
         app.component('TukButton', Button)
         app.component('TukTag', Tag)
-    }
+    },
 }
